@@ -169,7 +169,7 @@ var config_data = `
       "code": "co",
       "type": "text",
       "size": 15,
-      "maxSize": 55
+      "maxSize": 100
     }
   ]
 }`;
