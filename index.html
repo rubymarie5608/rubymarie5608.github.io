@@ -1,397 +1,342 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QRScout</title>
-</head>
-<body>
-    <h1>QRScout</h1>
-    <script type="application/json" id="config-data">
-        {
-            "title": "QRScout",
-            "page_title": "Reefscape",
-            "delimiter": "\t",
-            "teamNumber": 4206,
-            "theme": {
-                "light": {
-                    "background": "0 0% 100%",
-                    "foreground": "0 0% 0%",
-                    "card": "225 100% 75%",
-                    "card_foreground": "0 0% 0%",
-                    "popover": "0 0% 100%",
-                    "popover_foreground": "0 0% 0%",
-                    "primary": "240 100% 50%",
-                    "primary_foreground": "0 0% 100%",
-                    "secondary": "240 100% 50%",
-                    "secondary_foreground": "0 0% 100%",
-                    "muted": "240 100% 50%",
-                    "muted_foreground": "0 0% 0%",
-                    "accent": "240 100% 50%",
-                    "accent_foreground": "0 0% 100%",
-                    "destructive": "240 100% 50%",
-                    "destructive_foreground": "0 0% 100%",
-                    "border": "0 0% 0%",
-                    "input": "0 0% 0%",
-                    "ring": "240 100% 50%",
-                    "chart_1": "240 100% 50%",
-                    "chart_2": "240 100% 50%",
-                    "chart_3": "240 100% 50%",
-                    "chart_4": "240 100% 50%",
-                    "chart_5": "240 100% 50%"
-                },
-                "dark": {
-                    "background": "0 0% 4%",
-                    "foreground": "0 0% 100%",
-                    "card": "0 0% 0%",
-                    "card_foreground": "0 0% 100%",
-                    "popover": "0 0% 0%",
-                    "popover_foreground": "0 0% 100%",
-                    "primary": "240 100% 50%",
-                    "primary_foreground": "0 0% 100%",
-                    "secondary": "240 100% 50%",
-                    "secondary_foreground": "0 0% 100%",
-                    "muted": "240 100% 50%",
-                    "muted_foreground": "0 0% 100%",
-                    "accent": "240 100% 50%",
-                    "accent_foreground": "0 0% 0%",
-                    "destructive": "240 100% 50%",
-                    "destructive_foreground": "0 0% 100%",
-                    "border": "0 0% 100%",
-                    "input": "0 0% 100%",
-                    "ring": "240 100% 50%",
-                    "chart_1": "240 100% 50%",
-                    "chart_2": "240 100% 50%",
-                    "chart_3": "240 100% 50%",
-                    "chart_4": "240 100% 50%",
-                    "chart_5": "240 100% 50%"
-                }
-            },
-            "sections": [
-                {
-                    "name": "Prematch",
-                    "fields": [
-                        {
-                            "title": "Scouter Initials",
-                            "description": "Enter the initials of the scouter.",
-                            "type": "text",
-                            "required": true,
-                            "code": "scouter",
-                            "formResetBehavior": "preserve",
-                            "defaultValue": ""
-                        },
-                        {
-                            "title": "Match Number",
-                            "description": "Enter the match number.",
-                            "type": "number",
-                            "required": true,
-                            "code": "matchNumber",
-                            "formResetBehavior": "increment",
-                            "defaultValue": 1
-                        },
-                        {
-                            "title": "Robot",
-                            "description": "The robot you are scouting this match, based on driver station position.",
-                            "type": "select",
-                            "required": true,
-                            "code": "robot",
-                            "formResetBehavior": "preserve",
-                            "defaultValue": "R1",
-                            "choices": {
-                                "R1": "Red 1",
-                                "R2": "Red 2",
-                                "R3": "Red 3",
-                                "B1": "Blue 1",
-                                "B2": "Blue 2",
-                                "B3": "Blue 3"
-                            }
-                        },
-                        {
-                            "title": "Team Number",
-                            "description": "The team number of the robot you're scouting.",
-                            "type": "number",
-                            "required": true,
-                            "code": "teamNumber",
-                            "formResetBehavior": "reset",
-                            "defaultValue": 0,
-                            "min": 0,
-                            "max": 19999
-                        },
-                        {
-                            "title": "No Show",
-                            "description": "Check if the robot did not show up for the match.",
-                            "type": "boolean",
-                            "required": false,
-                            "code": "noShow",
-                            "formResetBehavior": "reset",
-                            "defaultValue": false
-                        }
-                    ]
-                },
-                {
-                    "name": "Autonomous",
-                    "fields": [
-                        {
-                            "title": "Moved?",
-                            "description": "Check if the robot moved during autonomous.",
-                            "type": "boolean",
-                            "required": false,
-                            "code": "Mved",
-                            "formResetBehavior": "reset",
-                            "defaultValue": false
-                        },
-                        {
-                            "title": "Coral L1 Scored",
-                            "description": "The number of level 1 coral scored during autonomous.",
-                            "type": "counter",
-                            "required": false,
-                            "code": "CLOA",
-                            "formResetBehavior": "reset",
-                            "defaultValue": 0,
-                            "min": 0,
-                            "step": 1
-                        },
-                        {
-                            "title": "Coral L2 Scored",
-                            "description": "The number of level 2 coral scored during autonomous.",
-                            "type": "counter",
-                            "required": false,
-                            "code": "CLTA",
-                            "formResetBehavior": "reset",
-                            "defaultValue": 0,
-                            "min": 0,
-                            "step": 1
-                        },
-                        {
-                            "title": "Coral L3 Scored",
-                            "description": "The number of level 3 coral scored during autonomous.",
-                            "type": "counter",
-                            "required": false,
-                            "code": "CLThA",
-                            "formResetBehavior": "reset",
-                            "defaultValue": 0,
-                            "min": 0,
-                            "step": 1
-                        },
-                        {
-                            "title": "Coral L4 Scored",
-                            "description": "The number of level 4 coral scored during autonomous.",
-                            "type": "counter",
-                            "required": false,
-                            "code": "CLFA",
-                            "formResetBehavior": "reset",
-                            "defaultValue": 0,
-                            "min": 0,
-                            "step": 1
-                        },
-                        {
-                            "title": "Net Algae Scored",
-                            "description": "The number of Algae scored in the net during autonomous.",
-                            "type": "counter",
-                            "required": false,
-                            "code": "NASA",
-                            "formResetBehavior": "reset",
-                            "defaultValue": 0,
-                            "min": 0,
-                            "step": 1
-                        },
-                        {
-                            "title": "Processor Algae Scored",
-                            "description": "The number of Algae scored in the processor during autonomous.",
-                            "type": "counter",
-                            "required": false,
-                            "code": "PASA",
-                            "formResetBehavior": "reset",
-                            "defaultValue": 0,
-                            "min": 0,
-                            "step": 1
-                        },
-                        {
-                            "title": "Auto Foul",
-                            "type": "counter",
-                            "required": false,
-                            "code": "auf",
-                            "formResetBehavior": "reset",
-                            "defaultValue": 0,
-                            "min": 0,
-                            "step": 1
-                        }
-                    ]
-                },
-                {
-                    "name": "Teleop",
-                    "fields": [
-                        {
-                            "title": "Pickup Location",
-                            "type": "select",
-                            "required": false,
-                            "code": "TGPL",
-                            "formResetBehavior": "reset",
-                            "defaultValue": "",
-                            "choices": {
-                                "1": "None",
-                                "2": "Ground",
-                                "3": "Human Player",
-                                "4": "Both"
-                            },
-                            "multiSelect": true
-                        },
-                        {
-                            "title": "Coral L1 Scored",
-                            "description": "The number of level 1 coral scored during teleop.",
-                            "type": "counter",
-                            "required": false,
-                            "code": "CLOT",
-                            "formResetBehavior": "reset",
-                            "defaultValue": 0,
-                            "min": 0,
-                            "step": 1
-                        },
-                        {
-                            "title": "Coral L2 Scored",
-                            "description": "The number of level 2 coral scored during teleop.",
-                            "type": "counter",
-                            "required": false,
-                            "code": "CLTT",
-                            "formResetBehavior": "reset",
-                            "defaultValue": 0,
-                            "min": 0,
-                            "step": 1
-                        },
-                        {
-                            "title": "Coral L3 Scored",
-                            "description": "The number of level 3 coral scored during teleop.",
-                            "type": "counter",
-                            "required": false,
-                            "code": "CLThT",
-                            "formResetBehavior": "reset",
-                            "defaultValue": 0,
-                            "min": 0,
-                            "step": 1
-                        },
-                        {
-                            "title": "Coral L4 Scored",
-                            "description": "The number of level 4 coral scored during teleop.",
-                            "type": "counter",
-                            "required": false,
-                            "code": "CLFT",
-                            "formResetBehavior": "reset",
-                            "defaultValue": 0,
-                            "min": 0,
-                            "step": 1
-                        },
-                        {
-                            "title": "Net Algae Scored",
-                            "description": "The number of Algae scored in the net during teleop.",
-                            "type": "counter",
-                            "required": false,
-                            "code": "NAST",
-                            "formResetBehavior": "reset",
-                            "defaultValue": 0,
-                            "min": 0,
-                            "step": 1
-                        },
-                        {
-                            "title": "Processor Algae Scored",
-                            "description": "The number of Algae scored in the processor during teleop.",
-                            "type": "counter",
-                            "required": false,
-                            "code": "PAST",
-                            "formResetBehavior": "reset",
-                            "defaultValue": 0,
-                            "min": 0,
-                            "step": 1
-                        },
-                        {
-                            "title": "Tipped/Fell Over?",
-                            "type": "boolean",
-                            "required": false,
-                            "code": "TFOT",
-                            "formResetBehavior": "reset",
-                            "defaultValue": false
-                        },
-                        {
-                            "title": "Died?",
-                            "type": "boolean",
-                            "required": false,
-                            "code": "DEg",
-                            "formResetBehavior": "reset",
-                            "defaultValue": false
-                        }
-                    ]
-                },
-                {
-                    "name": "Endgame",
-                    "fields": [
-                        {
-                            "title": "End Position",
-                            "type": "select",
-                            "required": true,
-                            "code": "epo",
-                            "formResetBehavior": "reset",
-                            "defaultValue": "No",
-                            "choices": {
-                                "No": "Not Parked",
-                                "P": "Parked",
-                                "Sc": "Shallow Climb",
-                                "Dc": "Deep Climb",
-                                "Fc": "Failed Climb"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "name": "Postmatch",
-                    "fields": [
-                        {
-                            "title": "Offense Skill",
-                            "type": "range",
-                            "required": false,
-                            "code": "or",
-                            "formResetBehavior": "reset",
-                            "defaultValue": 3,
-                            "min": 1,
-                            "max": 5,
-                            "step": 1
-                        },
-                        {
-                            "title": "Defensive Skill",
-                            "type": "range",
-                            "required": false,
-                            "code": "dr",
-                            "formResetBehavior": "reset",
-                            "defaultValue": 3,
-                            "min": 1,
-                            "max": 5,
-                            "step": 1
-                        },
-                        {
-                            "title": "Yellow/Red Card",
-                            "type": "select",
-                            "required": true,
-                            "code": "yc",
-                            "formResetBehavior": "reset",
-                            "defaultValue": "No Card",
-                            "choices": {
-                                "No Card": "No Card",
-                                "Yellow": "Yellow Card",
-                                "Red": "Red Card"
-                            }
-                        },
-                        {
-                            "title": "Comments",
-                            "type": "text",
-                            "required": false,
-                            "code": "co",
-                            "formResetBehavior": "reset",
-                            "defaultValue": "",
-                            "min": 0,
-                            "max": 50
-                        }
-                    ]
-                }
-            ]
-        }
-    </script>
-</body>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, maximum-scale=1.0">
+		<title>Scouting PASS</title>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="icon" sizes="16x16 32x32 64x64" href="favicon.ico">
+		<script src="resources/js/easy.qrcode.min.js"></script>
+		<script src="resources/js/TBAInterface.js"></script>
+		<script src="resources/js/googleSheets.js"></script>
+		<script src="resources/js/scoutingPASS.js"></script>
+		<script src="2025/reefscape_config.js"></script>
+		<link rel="stylesheet" href="resources/css/scoutingPASS.css">
+	</head>
+
+	<body>
+		<form id="scoutingForm" onsubmit="return false" name="scoutingForm">
+			<div id="main-panel-holder">
+				<div id="prematch" class="main-panel" style="background-color: black;">
+					<h1 id="prematchHeader1" class="page_title"><span class="odd">P</span><span class="even">W</span><span class="odd">N</span><span class="even">A</span><span class="odd">G</span><span class="even">E</span><br>Scouting 2020</h1>
+					<h2 id="prematchHeader2">pre-match</h2>
+					<p class="match-label"><input type="button" value="Next" id="nextButton1" onclick="swipePage(1)"></p>
+					<table id="prematch_table" style="font: Roboto">
+					<!-- ###PRE-MATCH-COMPONENTS###-->
+					</table>
+					<p class="match-label"><input type="button" value="Next" id="nextButton2" onclick="swipePage(1)"></p>
+				</div>
+
+				<div id="auton" class="main-panel" style="background-color: rgb(123, 168, 184);">
+					<h1 id="autonHeader1" class="page_title"><span class="odd">P</span><span class="even">W</span><span class="odd">n</span><span class="even">A</span><span class="odd">G</span><span class="even">E</span><br>Scouting 2020</h1>
+					<h2 id="autonHeader2">Auton</h2>
+					<p class="match-label"><input type="button" value="Prev" id="prevButton1" onclick="swipePage(-1)"><input type="button" value="Next" id="nextButton3" onclick="swipePage(1)"></p>
+					<table id="auton_table">
+					<!-- ###AUTON-COMPONENTS###-->
+					</table>
+					<p class="match-label"><input type="button" value="Prev" id="prevButton2" onclick="swipePage(-1)"> <input type="button" value="Next" id="nextButton4" onclick="swipePage(1)"></p>
+				</div>
+
+				<div id="teleop" class="main-panel" style="background-color: rgb(175, 207, 163);">
+					<h1 id="teleopHeader1" class="page_title"><span class="odd">P</span><span class="even">W</span><span class="odd">n</span><span class="even">A</span><span class="odd">G</span><span class="even">E</span><br>Scouting 2020</h1>
+					<h2 id="teleopHeader2" >Teleop</h2>
+					<p class="match-label"><input type="button" value="Prev" id="prevButton3" onclick="swipePage(-1)"><input type="button" value="Next" id="nextButton5" onclick="swipePage(1)"></p>
+					<table id="teleop_table">
+						<!-- ###TELEOP-COMPONENTS###-->
+					</table>
+					<p class="match-label"><input type="button" value="Prev" id="prevButton4" onclick="swipePage(-1)"> <input type="button" value="Next" id="nextButton6" onclick="swipePage(1)"></p>
+				</div>
+
+				<div id="endgame" class="main-panel" style="background-color: rgb(198, 186, 222);">
+					<h1 id="endgameHeader1" class="page_title"><span class="odd">P</span><span class="even">W</span><span class="odd">n</span><span class="even">A</span><span class="odd">G</span><span class="even">E</span><br>Scouting 2020</h1>
+					<h2 id="endgameHeader2">Endgame</h2>
+					<p class="match-label"><input type="button" value="Prev" id="prevButton5" onclick="swipePage(-1)"><input type="button" value="Next" id="nextButton7" onclick="swipePage(1)"></p>
+					<table id="endgame_table">
+						<!-- ###ENDGAME-COMPONENTS###-->
+					</table>
+					<p class="match-label"><input type="button" value="Prev" id="prevButton6" onclick="swipePage(-1)"> <input type="button" value="Next" id="nextButton8" onclick="swipePage(1)"></p>
+				</div>
+
+				<div id="post-match" class="main-panel" style="background-color: rgb(89, 134, 168);">
+					<h1 id="postmatchHeader" class="page_title"><span class="odd">P</span><span class="even">W</span><span class="odd">n</span><span class="even">A</span><span class="odd">G</span><span class="even">E</span><br>Scouting 2020</h1>
+					<h2>Miscellaneous</h2>
+					<p class="match-label"><input type="button" value="Prev" id="prevButton7" onclick="swipePage(-1)"><input type="button" value="Next" id="nextButton9" onclick="swipePage(1)"></p>
+					<table id="postmatch_table">
+						<!-- ###POST-MATCH-COMPONENTS###-->
+					</table>
+					<p class="match-label"><input type="button" value="Prev" id="prevButton8" onclick="swipePage(-1)"> <input type="button" value="Next" id="nextButton10" onclick="swipePage(1)"></p>
+				</div>
+
+				<div id="qr-code" class="main-panel" style="background-color: white;">
+					<h1 id="qrHeader1" class="page_title"><span class="odd">P</span><span class="even">W</span><span class="odd">n</span><span class="even">A</span><span class="odd">G</span><span class="even">E</span><br>Scouting 2020</h1>
+					<h2 id="qrHeader2">Generate QR Code</h2>
+					<p class="match-label"><input type="button" value="Prev" id="prevButton9" onclick="swipePage(-1)"></p>
+					<p id="qr-info"><span id="display_qr-info" style="border: none; text-align: center;"></span></p>
+					<table id="qr-table"><tr><td width="5%">&nbsp;</td><td width="90%">
+						<div id="qrcode" style="text-align:center">
+							<script>
+						// Create QRCode Object
+								qr = new QRCode(document.getElementById("qrcode"), options)
+					</script>
+					</div>
+				</td><td width="5%">&nbsp;</td></tr>
+				<tr><td width="5%">&nbsp;</td><td width="90%">
+					<div>
+						<p id="data" style="text-align:center"></p>
+					</div>
+				</td><td width="5%">&nbsp;</td></tr>
+			</table>
+					<p></p>
+					<p class="match-label"><input type="button" value="Display Data" id="displayButton" onclick="displayData()"><input type="button" value="Copy Data" id="copyButton" onclick="copyData()"></p>
+					<div id="submitButton">
+						<button id="submit" type="submit" class="submitForm">Send to Google Sheets</button>
+					</div>
+					<div id="clearButton">
+						<button type="button" class="clearForm" onclick="clearForm()">Clear Form</button>
+					</div>
+					<br>
+				</div>
+			</div>
+		</form>
+	</body>
 </html>
+
+var config_data = `
+{
+  "dataFormat": "tsv",
+  "title": "Scouting PASS 2025",
+  "page_title": "REEFSCAPE",
+  "checkboxAs": "10",
+  "prematch": [
+    { "name": "Scouter Initials",
+      "code": "s",
+      "type": "scouter",
+      "size": 5,
+      "maxSize": 5,
+      "required": "true"
+    },
+    { "name": "Event",
+      "code": "e",
+      "type": "event",
+      "defaultValue": "2025ilpe",
+      "required": "true"
+    },
+    { "name": "Match Level",
+      "code": "l",
+      "type": "level",
+      "choices": {
+        "qm": "Quals<br>",
+        "sf": "Semifinals<br>",
+        "f": "Finals"
+      },
+      "defaultValue": "qm",
+      "required": "true"
+    },
+    { "name": "Match #",
+      "code": "m",
+      "type": "match",
+      "min": 1,
+      "max": 150,
+      "required": "true"
+    },
+    { "name": "Robot",
+      "code": "r",
+      "type": "robot",
+      "choices": {
+        "r1": "Red-1",
+        "b1": "Blue-1<br>",
+        "r2": "Red-2",
+        "b2": "Blue-2<br>",
+        "r3": "Red-3",
+        "b3": "Blue-3"
+      },
+      "required":"true"
+    },
+    { "name": "Team #",
+      "code": "t",
+      "type": "team",
+      "min": 1,
+      "max": 99999
+    },
+    { "name": "Auto Start Position",
+      "code": "as",
+      "type": "clickable_image",
+      "filename": "2025/half_field.png",
+      "clickRestriction": "one",
+      "dimensions": "6 6",
+      "allowableResponses": "1 7 13 19 25 31",
+      "shape": "circle 5 black red true"
+    }
+  ],
+  "auton": [
+    { "name": "Leave Starting Line",
+      "code": "al",
+      "type": "bool"
+    },
+    { "name": "Coral L1",
+      "code": "ac1",
+      "type": "counter"
+    },
+    { "name": "Coral L2",
+      "code": "ac2",
+      "type": "counter"
+    },
+    { "name": "Coral L3",
+      "code": "ac3",
+      "type": "counter"
+    },
+    { "name": "Coral L4",
+      "code": "ac4",
+      "type": "counter"
+    },
+    { "name": "Auto Scoring Position",
+      "code": "asp",
+      "type": "clickable_image",
+      "filename": "2025/reef.png",
+      "dimensions": "6 6",
+      "allowableResponses": "1 2 3 4 5 6 7 8 9 10 11 12 13 14 17 18 19 20 23 24 25 26 27 28 29 30 31 32 33 34 35 36",
+      "shape": "circle 5 black red true"
+    },
+    { "name": "Processor Score",
+      "code": "aps",
+      "type": "counter"
+    },
+    { "name": "Net Score",
+      "code": "ans",
+      "type": "counter"
+    }
+  ],
+  "teleop": [
+    { "name": "Coral L1",
+      "code": "tc1",
+      "type": "counter"
+    },
+    { "name": "Coral L2",
+      "code": "tc2",
+      "type": "counter"
+    },
+    { "name": "Coral L3",
+      "code": "tc3",
+      "type": "counter"
+    },
+    { "name": "Coral L4",
+      "code": "tc4",
+      "type": "counter"
+    },
+    { "name": "Processor Score",
+      "code": "tps",
+      "type": "counter"
+    },
+    { "name": "Net Score",
+      "code": "tns",
+      "type": "counter"
+    },
+    { "name": "Pickup From",
+      "code": "tpu",
+      "type": "radio",
+      "choices": {
+        "s": "Coral Station<br>",
+        "f": "Floor<br>",
+        "b": "Both<br>",
+        "x": "Not Attempted"
+      },
+      "defaultValue": "x"
+    },
+    { "name": "Scored in<br>Opponent<br>Processor",
+      "code": "opp",
+      "type": "bool"
+    }
+  ],
+  "endgame": [
+    { "name": "Barge Timer",
+      "code": "ebt",
+      "type": "timer"
+    },
+    { "name": "Final Robot Status",
+      "code": "efs",
+      "type":"radio",
+      "choices": {
+        "bp": "Parked<br>",
+        "ba": "Parked/Failed Climb<br>",
+        "bs": "Shallow Cage<br>",
+        "bd": "Deep Cage<br>",
+        "x": "Not attempted"
+      },
+      "defaultValue": "x"
+    }
+  ],
+  "postmatch": [
+    { "name": "Attained Coopertition Pt",
+      "code": "cop",
+      "type": "bool"
+    },
+    { "name": "Algae Left in Reef",
+      "code": "alr",
+      "type": "number",
+      "min": 0,
+      "max": 9,
+      "defaultValue": 0
+    },
+    { "name": "Driver Skill",
+      "code": "ds",
+      "type": "radio",
+      "choices": {
+        "n": "Not Effective<br>",
+        "a": "Average<br>",
+        "v": "Very Effective<br>",
+        "x": "Not Observed"
+      },
+      "defaultValue": "x"
+    },
+    { "name": "Defense Rating",
+      "code": "dr",
+      "type": "radio",
+      "choices": {
+        "b": "Below Average<br>",
+        "a": "Average<br>",
+        "g": "Good<br>",
+        "e": "Excellent<br>",
+        "x": "Did not play defense"
+      },
+      "defaultValue": "x"
+    },
+    { "name": "Speed Rating",
+      "code": "sr",
+      "type": "radio",
+      "choices": {
+        "1": "1 (slow)<br>",
+        "2": "2<br>",
+        "3": "3<br>",
+        "4": "4<br>",
+        "5": "5 (fast)"
+      },
+      "defaultValue":"3"
+    },
+    { "name": "Died/Immobilized",
+      "code": "die",
+      "type": "bool"
+    },
+    { "name": "Tippy<br>(almost tipped over)",
+      "code": "tip",
+      "type": "bool"
+    },
+    { "name": "Dropped Coral (>2)",
+      "code": "dc",
+      "type": "bool"
+    },
+    { "name": "Dropped Algae (>2)",
+      "code": "da",
+      "type": "bool"
+    },
+    { "name": "Make good<br>alliance partner?",
+      "tooltip": "Would you want this robot on your alliance in eliminations?",
+      "code": "all",
+      "type": "bool"
+    },
+    { "name": "Comments",
+      "code": "co",
+      "type": "text",
+      "size": 15,
+      "maxSize": 55
+    }
+  ]
+}`;
